@@ -25,9 +25,11 @@ export default function Login() {
     const navigation = useNavigation()
     const from = location.state?.from || "/host";
  
-    if (data?.token) {
-        navigate(from, { replace: true })
-    }
+    React.useEffect(() => {
+        if (data?.token) {
+            navigate(from, { replace: true })
+        }
+    }, [data])
     
     return (
         <div className="login-container">
@@ -38,7 +40,7 @@ export default function Login() {
             <h1>Sign in to your account</h1>
             {
                 data?.error && 
-                useEffect(<h3 className="login-error">{data.error}</h3>, [])
+                <h3 className="login-error">{data.error}</h3>
             }
             <Form 
                 action="/login" 
